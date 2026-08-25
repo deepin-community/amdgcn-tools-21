@@ -2,3 +2,17 @@
 
 %:
 	dh $@
+
+gcn_target_name = amdgcn-amdhsa
+
+pkg_ver = 21
+llvm_ver = 21
+
+override_dh_link:
+	dh_link -pamdgcn-tools-$(pkg_ver) \
+	  /usr/lib/llvm-$(llvm_ver)/bin/llvm-ar /usr/$(gcn_target_name)/bin/ar \
+	  /usr/lib/llvm-$(llvm_ver)/bin/llvm-mc /usr/$(gcn_target_name)/bin/as \
+	  /usr/lib/llvm-$(llvm_ver)/bin/lld /usr/$(gcn_target_name)/bin/ld \
+	  /usr/lib/llvm-$(llvm_ver)/bin/llvm-nm /usr/$(gcn_target_name)/bin/nm \
+	  /usr/lib/llvm-$(llvm_ver)/bin/llvm-objdump /usr/$(gcn_target_name)/bin/objdump \
+	  /usr/lib/llvm-$(llvm_ver)/bin/llvm-ranlib /usr/$(gcn_target_name)/bin/ranlib
